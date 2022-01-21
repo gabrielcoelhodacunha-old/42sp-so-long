@@ -3,14 +3,14 @@ CC	= gcc
 CFLAGS	= -Wall -Wextra -Werror
 MKINP	= $(MAKE) -C
 GNLP	= gnl
+GNL	= $(GNLP)/libgnl.a
 MKGNL	= $(MKINP) $(GNLP)
-SRC	= main.c
+SRC	= main.c so_long.c
 SRCP	= src
 ICDP	= include
 ICDS	= -I. -I$(ICDP) -I$(GNLP)
-LIBS	= -L$(GNLP) -lgnl
 OBJP	= obj
-OBJS	= $(SRC:%.c=$(OBJP)/%.o)
+OBJS	= $(SRC:%.c=$(OBJP)/%.o) $(GNL)
 RM	= rm -fr
 VPATH	= . $(SRCP) $(ICDP) $(OBJP)
 
@@ -21,12 +21,14 @@ all:		$(NAME)
 
 bonus:		all
 
+$(GNL):
+		$(MKGNL)
+
 $(OBJP):
 		mkdir -p $(OBJP)
 
-$(NAME):	$(OBJP) $(OBJS)
-		$(MKGNL)
-		$(CC) $(CFLAGS) $(LIBS) -o $(NAME) $(OBJS) 
+$(NAME):	$(GNL) $(OBJP) $(OBJS)
+		$(CC) $(CFLAGS) -o $(NAME) $(OBJS) 
 
 clean:
 		$(MKGNL) clean -s

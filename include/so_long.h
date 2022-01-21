@@ -4,4 +4,6 @@
 # include <fcntl.h>
 # include "get_next_line.h"
 
+void	so_long(char *map_file);
+
 #endif
