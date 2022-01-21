@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcoelho- <gcoelho-@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,13 +12,16 @@
 
 #include "libft.h"
 
-void	*ft_memchr(const void *b, int c, size_t len)
+void	*ft_memcpy(void *dst, const void *src, size_t len)
 {
-	size_t	idx;
+	unsigned char		*p_dst;
+	const unsigned char	*p_src;
 
-	idx = -1;
-	while (++idx < len)
-		if (((const unsigned char *) b)[idx] == (unsigned char) c)
-			return ((void *) &b[idx]);
-	return (NULL);
+	if (!dst && !src)
+		return (NULL);
+	p_dst = dst;
+	p_src = src;
+	while (len--)
+		*(p_dst++) = *(p_src++);
+	return (dst);
 }
