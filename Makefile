@@ -8,49 +8,58 @@ MKMLX	= $(MKINP) $(MLXP)
 LFTP	= utils/libft
 LFT	= $(LFTP)/libft.a
 MKLFT	= $(MKINP) $(LFTP)
-GNLP	= utils/gnl
-GNL	= $(GNLP)/libgnl.a
-MKGNL	= $(MKINP) $(GNLP)
-SRC	= main.c so_long.c read_map_file.c
+SRC	= main.c so_long.c read_map_file.c create_imap.c handle_error.c
 SRCP	= src
 ICDP	= include
-ICDS	= -I. -I$(ICDP) -I$(MLXP) -I$(LFTP) -I$(GNLP)
+ICDS	= -I. -I$(ICDP) -I$(MLXP) -I$(LFTP)/$(ICDP)
 OBJP	= obj
-OBJS	= $(SRC:%.c=$(OBJP)/%.o) $(MLX) $(LFT) $(GNL)
+OBJS	= $(SRC:%.c=$(OBJP)/%.o) $(MLX) $(LFT)
+DOBJP	= dobj
+DOBJS	= $(SRC:%.c=$(DOBJP)/%.o) $(MLX) $(LFT)
 RM	= rm -fr
-VPATH	= . $(SRCP) $(OBJP)
+VGD	= valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes
+VPATH	= . $(SRCP) $(OBJP) $(DOBJP)
 
 $(OBJP)/%.o:	%.c
 		$(CC) $(CFLAGS) $(ICDS) -c $< -o $@
+
+$(DOBJP)/%.o:	%.c
+		$(CC) $(CFLAGS) -g $(ICDS) -c $< -o $@
 
 all:		$(NAME)
 
 bonus:		all
 
-$(LFT):
-		$(MKLFT)
-
-$(GNL):
-		$(MKGNL)
-
 $(MLX):
 		$(MKMLX)
+
+$(LFT):
+		$(MKLFT) bonus 
+		$(MKLFT) gnl
 
 $(OBJP):
 		mkdir -p $(OBJP)
 
-$(NAME):	$(LFT) $(GNL) $(MLX) $(OBJP) $(OBJS)
+$(NAME):	$(MLX) $(LFT) $(OBJP) $(OBJS)
 		$(CC) $(CFLAGS) -o $(NAME) $(OBJS) 
 
+$(DOBJP):
+		mkdir -p $(DOBJP)
+
+debug:		$(MLX) $(LFT) $(DOBJP) $(DOBJS)
+		$(CC) $(CFLAGS) -o $(NAME) $(DOBJS)
+
+valgrind:	all
+		$(VGD) ./so_long $(BER)
+
 clean:
-		$(MKLFT) clean
-		$(MKGNL) clean
 		$(MKMLX) clean
+		$(MKLFT) clean
 		$(RM) $(OBJP)
+		$(RM) $(DOBJP)
 
 fclean:		clean
 		$(MKLFT) fclean
-		$(MKGNL) fclean
 		$(RM) $(NAME)
 
 re:		fclean all
