@@ -8,8 +8,7 @@ MKMLX	= $(MKINP) $(MLXP)
 LFTP	= utils/libft
 LFT	= $(LFTP)/libft.a
 MKLFT	= $(MKINP) $(LFTP)
-SRC	= main.c so_long.c read_map_file.c create_imap.c handle_error.c \
-	  handle_map_file.c handle_line.c destroy_imap.c
+SRC	= so_long.c create_matrix.c destroy_matrix.c exit_with_error.c
 SRCP	= src
 ICDP	= include
 ICDS	= -I. -I$(ICDP) -I$(MLXP) -I$(LFTP)/$(ICDP)
