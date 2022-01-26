@@ -11,13 +11,15 @@ int	main(int argc, char **argv)
 
 static void	handle_argc(int argc)
 {
-	char	*message;
+	t_error	e;
 
 	if (argc == 2)
 		return ;
 	else if (argc < 2)
-		message = ft_strjoin("", "One argument is required");
+		e.message = ft_strjoin("", "One argument is required");
 	else if (argc > 2)
-		message = ft_strjoin("", "Only one argument is required");
-	handle_error(EINVAL, &message);
+		e.message = ft_strjoin("", "Only one argument is required");
+	errno = EINVAL;
+	e.imap = NULL;
+	handle_error(&e);
 }

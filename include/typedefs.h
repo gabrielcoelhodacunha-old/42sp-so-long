@@ -3,9 +3,15 @@
 
 typedef struct	s_imap
 {
-	t_list	*values;
 	size_t	rows;
 	size_t	columns;
+	t_list	*values;
 }	t_imap;
+
+typedef struct	s_error
+{
+	char	*message;
+	t_imap	*imap;
+}	t_error;
 
 #endif
