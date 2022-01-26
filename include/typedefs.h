@@ -5,7 +5,7 @@ typedef struct	s_imap
 {
 	size_t	rows;
 	size_t	columns;
-	t_list	*values;
+	char	**values;
 }	t_imap;
 
 typedef struct	s_error
