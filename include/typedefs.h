@@ -11,7 +11,7 @@ typedef struct	s_matrix
 typedef struct	s_error
 {
 	char	*message;
-	t_matrix	*map_description;
+	t_matrix	*matrix;
 }	t_error;
 
 #endif
