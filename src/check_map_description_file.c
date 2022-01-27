@@ -1,23 +1,28 @@
 #include "so_long.h"
 
-static void	check_file_descriptor(int fd);
-static void	check_line_len(char *line, size_t *md_format);
-static void	check_map_description_format(size_t *md_format);
-static void	get_map_description_format(int fd, size_t *md_format);
-
-t_matrix	*create_map_description(char *md_file)
+void	check_map_description_file(char *md_file);
 {
-	int	fd;
-	size_t	md_format[2];
-
-	fd = open(md_file, O_RDWR);
-	check_file_descriptor(fd);
-	get_map_description_format(fd, md_format);
-	close(fd);
-	return (create_matrix(md_format[0], md_format[1]));
+	check_permissions(md_file);
+	check_content(md_file);
 }
 
-static void	get_map_description_format(int fd, size_t *md_format)
+static void	check_permissions(char *md_file)
+{
+	int	fd;
+	t_error error;
+
+	fd = open(md_file, O_RDWR);
+	if (fd != -1)
+	{
+		close(fd);
+		return ;
+	}
+	error.message = ft_strdup(md_file);
+	error.matrix = NULL;
+	exit_with_error(&error);
+}
+
+static void	check_content(char *md_file)
 {
 	char	*line;
 
@@ -61,16 +66,5 @@ static void	check_line_len(char *line, size_t *md_format)
 	error.matrix = NULL;
 	free(line);
 	free(rows_str);
-	exit_with_error(&error);
-}
-
-static void	check_file_descriptor(int fd)
-{
-	t_error error;
-
-	if (fd != -1)
-		return ;
-	error.message = ft_strdup("Map description file");
-	error.matrix = NULL;
 	exit_with_error(&error);
 }

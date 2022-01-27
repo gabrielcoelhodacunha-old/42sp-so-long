@@ -9,9 +9,12 @@
 # include "constants.h"
 # include "typedefs.h"
 
-t_matrix	create_matrix(size_t rows, size_t columns);
-void	destroy_matrix(t_matrix *matrix);
+t_matrix	*create_map_description(char *md_file);
+void	fill_map_description(t_matrix *md, char *md_file);
 
-void	exit_with_error(t_error *error);
+t_matrix	*create_matrix(size_t rows, size_t columns);
+void	destroy_matrix(t_matrix *m);
+
+void	exit_with_error(t_error *e);
 
 #endif
