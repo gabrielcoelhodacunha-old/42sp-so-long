@@ -12,13 +12,14 @@ int	main(int argc, char **argv)
 
 static void	so_long(char *map_description_file)
 {
-	t_matrix	*map_description;
+	//t_matrix	*map_description;
+
+	/* Check file*/
+	check_map_description_file(map_description_file);
 
 	/* Read file */
 	//map_description = create_map_description(map_description_file);
 	//fill_map_description(map_description, map_description_file);
-
-	/* Check map components*/
 
 	/* Initialize mlx */
 
@@ -27,7 +28,7 @@ static void	so_long(char *map_description_file)
 	/* Handle events */
 
 	/* Clear memory */
-	destroy_matrix(map_description);
+	//destroy_matrix(map_description);
 }
 
 static int	ends_with_dot_ber(char *file)

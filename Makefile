@@ -9,7 +9,7 @@ LFTP	= utils/libft
 LFT	= $(LFTP)/libft.a
 MKLFT	= $(MKINP) $(LFTP)
 SRC	= so_long.c create_matrix.c destroy_matrix.c exit_with_error.c \
-	  create_map_description.c
+	  check_map_description_file.c create_map_description.c
 SRCP	= src
 ICDP	= include
 ICDS	= -I. -I$(ICDP) -I$(MLXP) -I$(LFTP)/$(ICDP)
