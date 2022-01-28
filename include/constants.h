@@ -1,10 +1,14 @@
 #ifndef CONSTANTS_H
 # define CONSTANTS_H
 # define MAP_COMPONENTS "01CEP"
-# define EMPTY '0'
-# define WALL '1'
-# define COLLECTIBLE 'C'
-# define EXIT 'E'
-# define PLAYER 'P'
+
+enum	e_components
+{
+	EMPTY = '0',
+	WALL = '1',
+	COLLECTIBLE = 'C',
+	EXIT = 'E',
+	PLAYER = 'P'
+};
 
 #endif

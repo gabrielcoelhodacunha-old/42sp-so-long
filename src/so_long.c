@@ -1,25 +1,13 @@
 #include "so_long.h"
 
-static void	check_args(int argc, char **argv);
-static void	so_long(char *map_description_file);
-
-int	main(int argc, char **argv)
-{
-	check_args(argc, argv);
-	so_long(argv[1]);
-	exit(EXIT_SUCCESS);
-}
-
 static void	so_long(char *map_description_file)
 {
-	//t_matrix	*map_description;
+	t_matrix	*map_description;
 
-	/* Check file*/
 	check_map_description_file(map_description_file);
-
-	/* Read file */
-	//map_description = create_map_description(map_description_file);
-	//fill_map_description(map_description, map_description_file);
+	map_description = create_map_description(map_description_file);
+	fill_map_description(map_description, map_description_file);
+	check_map_description(map_description);
 
 	/* Initialize mlx */
 
@@ -28,13 +16,19 @@ static void	so_long(char *map_description_file)
 	/* Handle events */
 
 	/* Clear memory */
-	//destroy_matrix(map_description);
+	destroy_matrix(map_description);
 }
 
-static int	ends_with_dot_ber(char *file)
+static void	check_args(int argc, char **argv);
+
+int	main(int argc, char **argv)
 {
-	return (!ft_strncmp(file + ft_strlen(file) - 4, ".ber", 4));
+	check_args(argc, argv);
+	so_long(argv[1]);
+	exit(EXIT_SUCCESS);
 }
+
+static int	ends_with_dot_ber(char *file);
 
 static void	check_args(int argc, char **argv)
 {
@@ -54,4 +48,9 @@ static void	check_args(int argc, char **argv)
 	errno = EINVAL;
 	error.matrix = NULL;
 	exit_with_error(&error);
+}
+
+static int	ends_with_dot_ber(char *file)
+{
+	return (!ft_strncmp(file + ft_strlen(file) - 4, ".ber", 4));
 }

@@ -16,6 +16,7 @@ t_matrix	*create_matrix(size_t rows, size_t columns);
 void	destroy_matrix(t_matrix *m);
 
 void	check_map_description_file(char *md_file);
+void	check_map_description(t_matrix *md);
 void	exit_with_error(t_error *e);
 
 #endif
