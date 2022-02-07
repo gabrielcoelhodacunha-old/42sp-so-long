@@ -3,6 +3,7 @@
 # include <stdio.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <X11/X.h>
 # include "mlx.h"
 # include "libft.h"
 # include "get_next_line.h"
@@ -10,6 +11,9 @@
 # include "typedefs.h"
 
 void	so_long(void *mlx, t_matrix *map_description);
+
+int	handle_mouse(int button, int x, int y, void *param);
+int	handle_close(void *mlx);
 
 t_matrix	*create_map_description(char *md_file);
 void	fill_map_description(t_matrix *md, char *md_file);
