@@ -8,16 +8,17 @@ MKMLX	= $(MKINP) $(MLXP)
 LFTP	= utils/libft
 LFT	= $(LFTP)/libft.a
 MKLFT	= $(MKINP) $(LFTP)
-SRC	= so_long.c create_matrix.c destroy_matrix.c exit_with_error.c \
+SRC	= main.c so_long.c create_matrix.c destroy_matrix.c exit_with_error.c \
 	  check_map_description_file.c create_map_description.c fill_map_description.c \
-	  check_map_description.c
+	  check_map_description.c check_mlx.c
 SRCP	= src
 ICDP	= include
 ICDS	= -I. -I$(ICDP) -I$(MLXP) -I$(LFTP)/$(ICDP)
+LIBS	= -L$(LFTP) -lft -L$(MLXP) -lmlx -lXext -lX11
 OBJP	= obj
-OBJS	= $(SRC:%.c=$(OBJP)/%.o) $(MLX) $(LFT)
+OBJS	= $(SRC:%.c=$(OBJP)/%.o)
 DOBJP	= dobj
-DOBJS	= $(SRC:%.c=$(DOBJP)/%.o) $(MLX) $(LFT)
+DOBJS	= $(SRC:%.c=$(DOBJP)/%.o)
 RM	= rm -fr
 VGD	= valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes
 VPATH	= . $(SRCP) $(OBJP) $(DOBJP)
@@ -36,20 +37,20 @@ $(MLX):
 		$(MKMLX)
 
 $(LFT):
-		$(MKLFT) bonus 
+		$(MKLFT) bonus
 		$(MKLFT) gnl
 
 $(OBJP):
 		mkdir -p $(OBJP)
 
 $(NAME):	$(MLX) $(LFT) $(OBJP) $(OBJS)
-		$(CC) $(CFLAGS) -o $(NAME) $(OBJS) 
+		$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 
 $(DOBJP):
 		mkdir -p $(DOBJP)
 
 debug:		$(MLX) $(LFT) $(DOBJP) $(DOBJS)
-		$(CC) $(CFLAGS) -o $(NAME) $(DOBJS)
+		$(CC) $(CFLAGS) -o $(NAME) $(DOBJS) $(LIBS)
 
 valgrind:	all
 		$(VGD) ./so_long $(BER)

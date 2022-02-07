@@ -8,6 +8,12 @@ typedef struct	s_matrix
 	char	**values;
 }	t_matrix;
 
+typedef struct	s_screen
+{
+	int	x;
+	int	y;
+}	t_screen;
+
 typedef struct	s_error
 {
 	char	*message;

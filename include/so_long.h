@@ -9,6 +9,8 @@
 # include "constants.h"
 # include "typedefs.h"
 
+void	so_long(void *mlx, t_matrix *map_description);
+
 t_matrix	*create_map_description(char *md_file);
 void	fill_map_description(t_matrix *md, char *md_file);
 
@@ -17,6 +19,7 @@ void	destroy_matrix(t_matrix *m);
 
 void	check_map_description_file(char *md_file);
 void	check_map_description(t_matrix *md);
+void	check_mlx(void *mlx, t_matrix *map_description);
 void	exit_with_error(t_error *e);
 
 #endif
