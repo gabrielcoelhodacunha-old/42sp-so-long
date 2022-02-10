@@ -8,17 +8,21 @@ MKMLX	= $(MKINP) $(MLXP)
 LFTP	= libft
 LFT	= $(LFTP)/libft.a
 MKLFT	= $(MKINP) $(LFTP)
-SRC	= main.c so_long.c create_matrix.c destroy_matrix.c exit_with_error.c \
-	  check_map_description_file.c create_map_description.c fill_map_description.c \
-	  check_map_description.c check_mlx.c handle_mouse.c handle_close.c
+SRC	= main.c so_long.c exit_with_error.c check_map_file.c create_map.c \
+	  fill_map.c check_map.c check_mlx.c handle_mouse.c handle_close.c \
+	  destroy_game.c check_allocation.c
 SRCP	= src
+UTILS	= create_matrix.c destroy_matrix.c
+UTILSP	= utils
 ICDP	= include
 ICDS	= -I. -I$(ICDP) -I$(MLXP) -I$(LFTP)/$(ICDP)
 LIBS	= -L$(LFTP) -lft -L$(MLXP) -lmlx -lXext -lX11
 OBJP	= obj
-OBJS	= $(SRC:%.c=$(OBJP)/%.o)
+OBJS	= $(SRC:%.c=$(OBJP)/%.o) \
+	$(UTILS:%.c=$(OBJP)/%.o)
 DOBJP	= dobj
-DOBJS	= $(SRC:%.c=$(DOBJP)/%.o)
+DOBJS	= $(SRC:%.c=$(DOBJP)/%.o) \
+	$(UTILS:%.c=$(DOBJP)/%.o)
 RM	= rm -fr
 VGD	= valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes
 VPATH	= . $(SRCP) $(OBJP) $(DOBJP)

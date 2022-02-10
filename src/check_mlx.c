@@ -1,13 +1,10 @@
 #include "so_long.h"
 
-void	check_mlx(void *mlx, t_matrix *map_description)
+void	check_mlx(t_game *game)
 {
-	t_error	error;
-
-	if (mlx)
+	if (game->mlx)
 		return ;
 	errno = EIO;
-	error.message = ft_strdup("MiniLibX could not establish connection between so_long and the display");
-	error.matrix = map_description;
-	exit_with_error(&error);
+	game->error = ft_strdup("MiniLibX could not establish connection between so_long and the display");
+	exit_with_error(game);
 }

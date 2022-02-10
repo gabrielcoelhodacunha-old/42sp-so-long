@@ -1,34 +1,21 @@
 #include "so_long.h"
 
-static void	build_error_message(t_error *error);
-static void	show_error_message(t_error *error);
-static void	clear_error_memory(t_error *error);
+static void	build_error(char *error);
 
-void	exit_with_error(t_error *error)
+void	exit_with_error(t_game *game)
 {
-	build_error_message(error);
-	show_error_message(error);
-	clear_error_memory(error);
+	build_error(game->error);
+	perror(game->error);
+	destroy_game(game);
 	exit(errno);
 }
 
-static void	build_error_message(t_error *error)
+static void	build_error(char *error)
 {
 	char	*auxiliary;
 
-	auxiliary = ft_strjoin("Error\n\t", error->message);
-	free(error->message);
-	error->message = ft_strjoin(auxiliary, " ");
+	auxiliary = ft_strjoin("Error\n\t", error);
+	free(error);
+	error = ft_strjoin(auxiliary, " ");
 	free(auxiliary);
-}
-
-static void	show_error_message(t_error *error)
-{
-	perror(error->message);
-}
-
-static void	clear_error_memory(t_error *error)
-{
-	destroy_matrix(error->matrix);
-	free(error->message);
 }

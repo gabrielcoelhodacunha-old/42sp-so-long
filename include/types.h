@@ -5,19 +5,15 @@ typedef struct	s_matrix
 {
 	size_t	rows;
 	size_t	columns;
-	char	**values;
+	void	**values;
 }	t_matrix;
 
-typedef struct	s_coordinate
+typedef struct	s_game
 {
-	int	x;
-	int	y;
-}	t_coordinate;
-
-typedef struct	s_error
-{
-	char	*message;
-	t_matrix	*matrix;
-}	t_error;
+	t_matrix	*map;
+	void	*mlx;
+	void	*window;
+	char	*error;
+}	t_game;
 
 #endif
