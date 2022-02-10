@@ -7,10 +7,11 @@
 # include "mlx.h"
 # include "libft.h"
 # include "get_next_line.h"
+# include "ft_printf.h"
 # include "constants.h"
-# include "typedefs.h"
+# include "types.h"
 
-void	so_long(void *mlx, t_matrix *map_description);
+void	so_long(char *map_description_file);
 
 int	handle_mouse(int button, int x, int y, void *param);
 int	handle_close(void *mlx);

@@ -1,5 +1,5 @@
-#ifndef TYPEDEFS_H
-# define TYPEDEFS_H
+#ifndef TYPES_H
+# define TYPES_H
 
 typedef struct	s_matrix
 {

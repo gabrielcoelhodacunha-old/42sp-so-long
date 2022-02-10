@@ -4,22 +4,8 @@ static void	check_args(int argc, char **argv);
 
 int	main(int argc, char **argv)
 {
-	char	*map_description_file;
-	t_matrix	*map_description;
-	void	*mlx;
-
 	check_args(argc, argv);
-	map_description_file = argv[1];
-	check_map_description_file(map_description_file);
-	map_description = create_map_description(map_description_file);
-	fill_map_description(map_description, map_description_file);
-	check_map_description(map_description);
-	mlx = mlx_init();
-	check_mlx(mlx, map_description);
-	so_long(mlx, map_description);
-	destroy_matrix(map_description);
-	mlx_destroy_display(mlx);
-	free(mlx);
+	so_long(argv[1]);
 	exit(EXIT_SUCCESS);
 }
 

@@ -5,7 +5,7 @@ MKINP	= $(MAKE) -sC
 MLXP	= mlx
 MLX	= $(MLXP)/libmlx.a
 MKMLX	= $(MKINP) $(MLXP)
-LFTP	= utils/libft
+LFTP	= libft
 LFT	= $(LFTP)/libft.a
 MKLFT	= $(MKINP) $(LFTP)
 SRC	= main.c so_long.c create_matrix.c destroy_matrix.c exit_with_error.c \
@@ -39,6 +39,7 @@ $(MLX):
 $(LFT):
 		$(MKLFT) bonus
 		$(MKLFT) gnl
+		$(MKLFT) printf
 
 $(OBJP):
 		mkdir -p $(OBJP)
@@ -67,4 +68,4 @@ fclean:		clean
 
 re:		fclean all
 
-.PHONY:		all bonus clean fclean re
+.PHONY:		all bonus clean fclean re debug valgrind

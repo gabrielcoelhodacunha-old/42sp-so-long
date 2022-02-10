@@ -1,13 +1,24 @@
 #include "so_long.h"
 
-void	so_long(void *mlx, t_matrix *map_description)
+void	so_long(char *map_description_file)
 {
+	t_matrix	*map_description;
+	void	*mlx;
+	
+	
 	t_coordinate	screen;
 	void	*window;
-	void	*empty;
-	t_coordinate	e;
 
-	(void) map_description;
+	check_map_description_file(map_description_file);
+	map_description = create_map_description(map_description_file);
+	fill_map_description(map_description, map_description_file);
+	check_map_description(map_description);
+
+
+	mlx = mlx_init();
+	check_mlx(mlx, map_description);
+
+
 	mlx_get_screen_size(mlx, &screen.x, &screen.y);
 	screen.x = map_description->columns * 16;
 	screen.y = map_description->rows * 16;
@@ -16,9 +27,10 @@ void	so_long(void *mlx, t_matrix *map_description)
 	mlx_mouse_hook(window, handle_mouse, 0);
 	mlx_hook(window, DestroyNotify, StructureNotifyMask, handle_close, mlx);
 
-	empty = mlx_xpm_file_to_image(mlx, XPM_EMPTY, &e.x, &e.y);
-	(void) empty;
-
 	mlx_loop(mlx);
+	
+	destroy_matrix(map_description);
 	mlx_destroy_window(mlx, window);
+	mlx_destroy_display(mlx);
+	free(mlx);
 }

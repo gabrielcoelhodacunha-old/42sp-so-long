@@ -16,6 +16,6 @@ void	fill_map_description(t_matrix *md, char *md_file)
 	}
 	row = -1;
 	while (++row < md->rows)
-		printf("%s", md->values[row]);
+		ft_printf("%s", md->values[row]);
 	close(fd);
 }

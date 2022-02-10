@@ -12,17 +12,6 @@ void	exit_with_error(t_error *error)
 	exit(errno);
 }
 
-static void	clear_error_memory(t_error *error)
-{
-	destroy_matrix(error->matrix);
-	free(error->message);
-}
-
-static void	show_error_message(t_error *error)
-{
-	perror(error->message);
-}
-
 static void	build_error_message(t_error *error)
 {
 	char	*auxiliary;
@@ -31,4 +20,15 @@ static void	build_error_message(t_error *error)
 	free(error->message);
 	error->message = ft_strjoin(auxiliary, " ");
 	free(auxiliary);
+}
+
+static void	show_error_message(t_error *error)
+{
+	perror(error->message);
+}
+
+static void	clear_error_memory(t_error *error)
+{
+	destroy_matrix(error->matrix);
+	free(error->message);
 }
