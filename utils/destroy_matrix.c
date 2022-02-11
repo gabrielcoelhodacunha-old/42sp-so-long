@@ -9,6 +9,7 @@ void	destroy_matrix(t_matrix *matrix)
 	if (!matrix->values)
 	{
 		free(matrix);
+		matrix = NULL;
 		return ;
 	}
 	row = -1;

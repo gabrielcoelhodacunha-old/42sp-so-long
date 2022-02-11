@@ -31,7 +31,7 @@ static void	check_content(t_game *game, char *file)
 	char	*line;
 	size_t	format[2];
 
-	fd = open(file, O_RDWR);
+	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
 	format[0] = 0;
 	if (line)

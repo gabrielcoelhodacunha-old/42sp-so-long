@@ -10,7 +10,6 @@ void	so_long(t_game *game, char *map_file)
 	fill_map(game->map, map_file);
 	check_map(game);
 
-
 	game->mlx = mlx_init();
 	check_mlx(game);
 

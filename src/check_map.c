@@ -14,20 +14,22 @@ static void	check_walls(t_game *game)
 	int	is_valid;
 	size_t	r;
 	size_t	c;
+	char	*map_row;
 
 	is_valid = 1;
 	r = -1;
 	while (++r < game->map->rows && is_valid)
 	{
+		map_row = (char *) game->map->values[r];
 		if (r == 0 || r == game->map->rows - 1)
 		{
 			c = 0;
 			while (c < game->map->columns && is_valid)
-				is_valid = game->map->values[r][c++] == WALL;
+				is_valid = map_row[c++] == WALL;
 		}
 		else
-			is_valid = game->map->values[r][0] == WALL
-				&& game->map->values[r][game->map->columns - 1] == WALL;
+			is_valid = map_row[0] == WALL
+				&& map_row[game->map->columns - 1] == WALL;
 	}
 	if (is_valid)
 		return ;
@@ -36,22 +38,24 @@ static void	check_walls(t_game *game)
 	exit_with_error(game);
 }
 
-size_t	get_component_index(char c);
-char	*get_component_information(size_t idx);
+static size_t	get_component_index(char c);
+static char	*get_component_information(size_t idx);
 
 static void	check_other_components(t_game *game)
 {
 	size_t	r;
 	size_t	c;
 	size_t	*components;
+	char	*row;
 
 	r = 0;
 	components = ft_calloc(5, sizeof(*components));
 	while (++r < game->map->rows - 1)
 	{
+		row = (char *) game->map->values[r];
 		c = 0;
 		while (++c < game->map->columns - 1)
-			components[get_component_index(game->map->values[r][c])]++;
+			components[get_component_index(row[c])]++;
 	}
 	c = 1;
 	while (++c < 5)
@@ -65,12 +69,12 @@ static void	check_other_components(t_game *game)
 	exit_with_error(game);
 }
 
-size_t	get_component_index(char c)
+static size_t	get_component_index(char c)
 {
 	return (ft_strchr(MAP_COMPONENTS, c) - MAP_COMPONENTS);
 }
 
-char	*get_component_information(size_t idx)
+static char	*get_component_information(size_t idx)
 {
 	switch (idx)
 	{

@@ -2,7 +2,7 @@
 
 static int	ends_with_dot_ber(char *file);
 
-static void	check_args(t_game *game, int argc, char **argv)
+void	check_args(t_game *game, int argc, char **argv)
 {
 	int	is_ber;
 
