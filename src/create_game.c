@@ -9,7 +9,7 @@ t_game	*create_game(void)
 		return (NULL);
 	game->map = NULL;
 	game->mlx = NULL;
-	game->window = NULL;
+	game->window.ptr = NULL;
 	game->error =  NULL;
 	return (game);
 }

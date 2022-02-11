@@ -16,16 +16,17 @@ void	destroy_game(t_game *game)
 
 static void	destroy_mlx(t_game *game)
 {
-	if (!game->mlx && !game->window)
+	if (!game->mlx && !game->window.ptr)
 		return ;
-	if (game->window)
-		mlx_destroy_window(game->mlx, game->window);
+	if (game->window.ptr)
+		mlx_destroy_window(game->mlx, game->window.ptr);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
 }
 
 static void	destroy_error(char *error)
 {
-	if (error)
-		free(error);
+	if (!error)
+		return ;
+	free(error);
 }
