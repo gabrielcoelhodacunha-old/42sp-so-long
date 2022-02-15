@@ -29,7 +29,6 @@ static void	configure_images(t_game *game)
 {
 	game->assets.empty.ptr = mlx_xpm_file_to_image(game->mlx, XPM_EMPTY, 
 			&game->assets.empty.width, &game->assets.empty.height);
-	/*
 	game->assets.wall.ptr = mlx_xpm_file_to_image(game->mlx, XPM_WALL, 
 			&game->assets.wall.width, &game->assets.wall.height);
 	game->assets.collectible.ptr = mlx_xpm_file_to_image(game->mlx, XPM_COLLECTIBLE, 
@@ -38,7 +37,6 @@ static void	configure_images(t_game *game)
 			&game->assets.exit.width, &game->assets.exit.height);
 	game->assets.player.ptr = mlx_xpm_file_to_image(game->mlx, XPM_PLAYER, 
 			&game->assets.player.width, &game->assets.player.height);
-	*/
 }
 
 static void	render_image(t_game *game, size_t row, size_t column)
@@ -49,12 +47,16 @@ static void	render_image(t_game *game, size_t row, size_t column)
 	type = ((char *) game->map->values[row])[column];
 	if (type == EMPTY)
 		image = game->assets.empty.ptr;
+	else if (type == WALL)
+		image = game->assets.wall.ptr;
+	else if (type == COLLECTIBLE)
+		image = game->assets.collectible.ptr;
+	else if (type == EXIT)
+		image = game->assets.exit.ptr;
+	else if (type == PLAYER)
+		image = game->assets.player.ptr;
 	else
 		image = NULL;
-	/*
-	else if (map[row][column] == WALL)
-		image = game->assets.wall.ptr;
-	*/
 	if (!image)
 		return ;
 	mlx_put_image_to_window(game->mlx, game->window.ptr, image, 
