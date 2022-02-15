@@ -18,12 +18,21 @@ typedef struct	s_assets
 	t_pwh	player;
 }	t_assets;
 
+typedef struct	s_player
+{
+	int	row;
+	int	column;
+	int	moves;
+}	t_player;
+
 typedef struct	s_game
 {
 	t_matrix	*map;
+	int	collectibles;
 	void	*mlx;
 	t_pwh	window;
 	t_assets	assets;
+	t_player	player;
 	char	*error;
 }	t_game;
 

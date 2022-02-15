@@ -2,8 +2,16 @@
 
 int	handle_keyboard(int key_code, void *game)
 {
+	t_game	*g;
+
+	g = (t_game *) game;
 	ft_printf("Key %i was pressed\n", key_code);
-	if (key_code == 0xff1b)
-		handle_close(((t_game *) game)->mlx);
+	if (key_code == XK_ESCAPE)
+		handle_close(g->mlx);
+	else if (key_code == XK_W 
+			|| key_code == XK_S
+			|| key_code == XK_A
+			|| key_code == XK_D)
+		handle_movement(g, key_code);
 	return (0);
 }

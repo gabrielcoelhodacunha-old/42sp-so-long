@@ -7,6 +7,7 @@ t_game	*create_game(void)
 	game = malloc(sizeof(*game));
 	if (!game)
 		return (NULL);
+	game->collectibles = 0;
 	game->map = NULL;
 	game->mlx = NULL;
 	game->window.ptr = NULL;

@@ -55,8 +55,6 @@ static void	render_image(t_game *game, size_t row, size_t column)
 		image = game->assets.exit.ptr;
 	else if (type == PLAYER)
 		image = game->assets.player.ptr;
-	else
-		image = NULL;
 	if (!image)
 		return ;
 	mlx_put_image_to_window(game->mlx, game->window.ptr, image, 
