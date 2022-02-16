@@ -4,11 +4,16 @@
 # define StructureNotifyMask (1L << 17)
 # define PIXEL_PER_IMAGE 32
 # define MAP_COMPONENTS "01CEP"
-# define XPM_EMPTY "assets/empty.xpm"
-# define XPM_WALL "assets/wall.xpm"
-# define XPM_COLLECTIBLE "assets/collectible.xpm"
-# define XPM_EXIT "assets/exit.xpm"
-# define XPM_PLAYER "assets/player.xpm"
+# define XPM_EMPTY "assets/empty_"
+# define XPM_WALL "assets/wall_"
+# define XPM_COLLECTIBLE "assets/collectible_"
+# define XPM_EXIT "assets/exit_"
+# define XPM_PLAYER "assets/player_"
+# define EMPTY_FRAMES 1
+# define WALL_FRAMES 4
+# define COLLECTIBLE_FRAMES 5
+# define EXIT_FRAMES 1
+# define PLAYER_FRAMES 12
 
 enum	e_components
 {

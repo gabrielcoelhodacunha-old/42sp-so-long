@@ -5,7 +5,6 @@ int	handle_keyboard(int key_code, void *game)
 	t_game	*g;
 
 	g = (t_game *) game;
-	ft_printf("Key %i was pressed\n", key_code);
 	if (key_code == XK_ESCAPE)
 		handle_close(g->mlx);
 	else if (key_code == XK_W 

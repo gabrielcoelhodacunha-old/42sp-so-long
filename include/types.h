@@ -11,11 +11,15 @@ typedef struct	s_pwh
 
 typedef struct	s_assets
 {
-	t_pwh	empty;
-	t_pwh	wall;
-	t_pwh	collectible;
-	t_pwh	exit;
-	t_pwh	player;
+	void	*empty[EMPTY_FRAMES];
+	void	*wall[WALL_FRAMES];
+	void	*collectible[COLLECTIBLE_FRAMES];
+	void	*exit[EXIT_FRAMES];
+	void	*player[PLAYER_FRAMES];
+	size_t	wall_frame;
+	size_t	collectible_frame;
+	size_t	exit_frame;
+	size_t	player_frame;
 }	t_assets;
 
 typedef struct	s_player

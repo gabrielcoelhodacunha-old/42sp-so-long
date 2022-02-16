@@ -29,11 +29,19 @@ static void	destroy_mlx(t_game *game)
 
 static void	destroy_assets(t_game *game)
 {
-	mlx_destroy_image(game->mlx, game->assets.empty.ptr);
-	mlx_destroy_image(game->mlx, game->assets.wall.ptr);
-	mlx_destroy_image(game->mlx, game->assets.collectible.ptr);
-	mlx_destroy_image(game->mlx, game->assets.exit.ptr);
-	mlx_destroy_image(game->mlx, game->assets.player.ptr);
+	int	idx;
+
+	mlx_destroy_image(game->mlx, game->assets.empty[0]);
+	idx = -1;
+	while (++idx < WALL_FRAMES)
+		mlx_destroy_image(game->mlx, game->assets.wall[idx]);
+	idx = -1;
+	while (++idx < COLLECTIBLE_FRAMES)
+		mlx_destroy_image(game->mlx, game->assets.collectible[idx]);
+	mlx_destroy_image(game->mlx, game->assets.exit[0]);
+	idx = -1;
+	while (++idx < PLAYER_FRAMES)
+		mlx_destroy_image(game->mlx, game->assets.player[idx]);
 }
 
 static void	destroy_error(char *error)

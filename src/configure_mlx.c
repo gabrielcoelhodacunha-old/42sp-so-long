@@ -25,40 +25,78 @@ static void	configure_window(t_game *game)
 			game->window.height, "so_long");
 }
 
+static void	set_images(t_game *game, void **component, char *initial_path, int frames)
+{
+	int	idx;
+	int	width;
+	int	height;
+	char	*asset;
+	char	*auxiliary;
+
+	idx = -1;
+	while (++idx < frames)
+	{
+		asset = ft_itoa(idx);
+		auxiliary = ft_strjoin(initial_path, asset);
+		free(asset);
+		asset = ft_strjoin(auxiliary, ".xpm");
+		component[idx] = mlx_xpm_file_to_image(game->mlx, asset, &width, &height);
+		free(auxiliary);
+		free(asset);
+	}
+}
+
 static void	configure_images(t_game *game)
 {
-	game->assets.empty.ptr = mlx_xpm_file_to_image(game->mlx, XPM_EMPTY, 
-			&game->assets.empty.width, &game->assets.empty.height);
-	game->assets.wall.ptr = mlx_xpm_file_to_image(game->mlx, XPM_WALL, 
-			&game->assets.wall.width, &game->assets.wall.height);
-	game->assets.collectible.ptr = mlx_xpm_file_to_image(game->mlx, XPM_COLLECTIBLE, 
-			&game->assets.collectible.width, &game->assets.collectible.height);
-	game->assets.exit.ptr = mlx_xpm_file_to_image(game->mlx, XPM_EXIT, 
-			&game->assets.exit.width, &game->assets.exit.height);
-	game->assets.player.ptr = mlx_xpm_file_to_image(game->mlx, XPM_PLAYER, 
-			&game->assets.player.width, &game->assets.player.height);
+	set_images(game, game->assets.empty, XPM_EMPTY, EMPTY_FRAMES);
+	set_images(game, game->assets.wall, XPM_WALL, WALL_FRAMES);
+	set_images(game, game->assets.collectible, XPM_COLLECTIBLE, COLLECTIBLE_FRAMES);
+	set_images(game, game->assets.exit, XPM_EXIT, EXIT_FRAMES);
+	set_images(game, game->assets.player, XPM_PLAYER, PLAYER_FRAMES);
 }
 
 static void	render_image(t_game *game, size_t row, size_t column)
 {
 	char	type;
 	void	*image;
+	int	ms;
 
 	type = ((char *) game->map->values[row])[column];
+	ms = 100;
 	if (type == EMPTY)
-		image = game->assets.empty.ptr;
+		image = game->assets.empty[0];
 	else if (type == WALL)
-		image = game->assets.wall.ptr;
+	{
+		if (game->assets.wall_frame == WALL_FRAMES)
+			game->assets.wall_frame = 0;
+		image = game->assets.wall[game->assets.wall_frame++];
+		ms /= WALL_FRAMES;
+	}
 	else if (type == COLLECTIBLE)
-		image = game->assets.collectible.ptr;
+	{
+		if (game->assets.collectible_frame == COLLECTIBLE_FRAMES)
+			game->assets.collectible_frame = 0;
+		image = game->assets.collectible[game->assets.collectible_frame++];
+		ms /= COLLECTIBLE_FRAMES;
+	}
 	else if (type == EXIT)
-		image = game->assets.exit.ptr;
+	{
+		image = game->assets.exit[0];
+		ms /= 1;
+	}
 	else if (type == PLAYER)
-		image = game->assets.player.ptr;
+	{
+		if (game->assets.player_frame == PLAYER_FRAMES)
+			game->assets.player_frame = 0;
+		image = game->assets.player[game->assets.player_frame++];
+		ms /= PLAYER_FRAMES;
+	}
 	if (!image)
 		return ;
 	mlx_put_image_to_window(game->mlx, game->window.ptr, image, 
 			PIXEL_PER_IMAGE * column, PIXEL_PER_IMAGE * (row + 1));
+	ms = 50;
+	usleep(ms);
 }
 
 static int	render_game(t_game *game)
@@ -79,7 +117,6 @@ static int	render_game(t_game *game)
 static void	configure_events(t_game *game)
 {
 	mlx_key_hook(game->window.ptr, handle_keyboard, game);
-	mlx_mouse_hook(game->window.ptr, handle_mouse, game->mlx);
 	mlx_hook(game->window.ptr, DestroyNotify, StructureNotifyMask, 
 			handle_close, game->mlx);
 	mlx_loop_hook(game->mlx, render_game, game);

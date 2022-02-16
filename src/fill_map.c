@@ -14,8 +14,5 @@ void	fill_map(t_matrix *map, char *file)
 		map->values[++row] = line;
 		line = get_next_line(fd);
 	}
-	row = -1;
-	while (++row < map->rows)
-		ft_printf("%s", map->values[row]);
 	close(fd);
 }

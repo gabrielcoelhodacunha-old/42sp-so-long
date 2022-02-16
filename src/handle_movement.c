@@ -43,12 +43,10 @@ static int	has_collided(t_game *game, int *new_location)
 		|| (tile_type == EXIT
 		&& game->collectibles))
 		return (1);
-	if (tile_type == COLLECTIBLE)
+	else if (tile_type == COLLECTIBLE)
 		game->collectibles--;
-	/*
 	else if (tile_type == EXIT)
-		;
-	*/
+		finish_game(game);
 	return (0);
 }
 

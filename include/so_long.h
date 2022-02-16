@@ -16,6 +16,7 @@ void	configure_map(t_game *game, char *map_file);
 void	configure_mlx(t_game *game);
 void	configure_collectibles(t_game *game);
 void	configure_player(t_game *game);
+void	finish_game(t_game *game);
 
 t_game	*create_game(void);
 t_matrix	*create_map(char *file);
