@@ -31,14 +31,21 @@ static void	destroy_assets(t_game *game)
 {
 	int	idx;
 
-	mlx_destroy_image(game->mlx, game->assets.empty[0]);
+	idx = -1;
+	while (++idx < EMPTY_FRAMES)
+		mlx_destroy_image(game->mlx, game->assets.empty[idx]);
 	idx = -1;
 	while (++idx < WALL_FRAMES)
 		mlx_destroy_image(game->mlx, game->assets.wall[idx]);
 	idx = -1;
 	while (++idx < COLLECTIBLE_FRAMES)
 		mlx_destroy_image(game->mlx, game->assets.collectible[idx]);
-	mlx_destroy_image(game->mlx, game->assets.exit[0]);
+	idx = -1;
+	while (++idx < EXIT_FRAMES)
+	{
+		mlx_destroy_image(game->mlx, game->assets.exit_closed[idx]);
+		mlx_destroy_image(game->mlx, game->assets.exit_open[idx]);
+	}
 	idx = -1;
 	while (++idx < PLAYER_FRAMES)
 		mlx_destroy_image(game->mlx, game->assets.player[idx]);

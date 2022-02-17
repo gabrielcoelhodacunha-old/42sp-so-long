@@ -51,7 +51,8 @@ static void	configure_images(t_game *game)
 	set_images(game, game->assets.empty, XPM_EMPTY, EMPTY_FRAMES);
 	set_images(game, game->assets.wall, XPM_WALL, WALL_FRAMES);
 	set_images(game, game->assets.collectible, XPM_COLLECTIBLE, COLLECTIBLE_FRAMES);
-	set_images(game, game->assets.exit, XPM_EXIT, EXIT_FRAMES);
+	set_images(game, game->assets.exit_closed, XPM_EXIT_CLOSED, EXIT_FRAMES);
+	set_images(game, game->assets.exit_open, XPM_EXIT_OPEN, EXIT_FRAMES);
 	set_images(game, game->assets.player, XPM_PLAYER, PLAYER_FRAMES);
 }
 
@@ -67,8 +68,10 @@ static void	render_image(t_game *game, size_t row, size_t column, time_t ssi)
 		image = game->assets.wall[ssi % WALL_FRAMES];
 	else if (type == COLLECTIBLE)
 		image = game->assets.collectible[ssi % COLLECTIBLE_FRAMES];
-	else if (type == EXIT)
-		image = game->assets.exit[ssi % EXIT_FRAMES];
+	else if (type == EXIT && game->collectibles)
+		image = game->assets.exit_closed[ssi % EXIT_FRAMES];
+	else if (type == EXIT && !game->collectibles)
+		image = game->assets.exit_open[ssi % EXIT_FRAMES];
 	else if (type == PLAYER)
 		image = game->assets.player[ssi % PLAYER_FRAMES];
 	if (!image)

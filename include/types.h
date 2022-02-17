@@ -14,7 +14,8 @@ typedef struct	s_assets
 	void	*empty[EMPTY_FRAMES];
 	void	*wall[WALL_FRAMES];
 	void	*collectible[COLLECTIBLE_FRAMES];
-	void	*exit[EXIT_FRAMES];
+	void	*exit_closed[EXIT_FRAMES];
+	void	*exit_open[EXIT_FRAMES];
 	void	*player[PLAYER_FRAMES];
 }	t_assets;
 

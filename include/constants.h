@@ -7,12 +7,13 @@
 # define XPM_EMPTY "assets/empty_"
 # define XPM_WALL "assets/wall_"
 # define XPM_COLLECTIBLE "assets/collectible_"
-# define XPM_EXIT "assets/exit_"
+# define XPM_EXIT_CLOSED "assets/exit_closed_"
+# define XPM_EXIT_OPEN "assets/exit_open_"
 # define XPM_PLAYER "assets/player_"
 # define EMPTY_FRAMES 1
 # define WALL_FRAMES 4
 # define COLLECTIBLE_FRAMES 5
-# define EXIT_FRAMES 1
+# define EXIT_FRAMES 4
 # define PLAYER_FRAMES 12
 
 enum	e_components
