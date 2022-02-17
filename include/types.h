@@ -16,10 +16,6 @@ typedef struct	s_assets
 	void	*collectible[COLLECTIBLE_FRAMES];
 	void	*exit[EXIT_FRAMES];
 	void	*player[PLAYER_FRAMES];
-	size_t	wall_frame;
-	size_t	collectible_frame;
-	size_t	exit_frame;
-	size_t	player_frame;
 }	t_assets;
 
 typedef struct	s_player
@@ -37,6 +33,7 @@ typedef struct	s_game
 	t_pwh	window;
 	t_assets	assets;
 	t_player	player;
+	time_t	initial_time;
 	char	*error;
 }	t_game;
 

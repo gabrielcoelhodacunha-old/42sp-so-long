@@ -55,61 +55,41 @@ static void	configure_images(t_game *game)
 	set_images(game, game->assets.player, XPM_PLAYER, PLAYER_FRAMES);
 }
 
-static void	render_image(t_game *game, size_t row, size_t column)
+static void	render_image(t_game *game, size_t row, size_t column, time_t ssi)
 {
 	char	type;
 	void	*image;
-	int	ms;
 
 	type = ((char *) game->map->values[row])[column];
-	ms = 100;
 	if (type == EMPTY)
-		image = game->assets.empty[0];
+		image = game->assets.empty[ssi % EMPTY_FRAMES];
 	else if (type == WALL)
-	{
-		if (game->assets.wall_frame == WALL_FRAMES)
-			game->assets.wall_frame = 0;
-		image = game->assets.wall[game->assets.wall_frame++];
-		ms /= WALL_FRAMES;
-	}
+		image = game->assets.wall[ssi % WALL_FRAMES];
 	else if (type == COLLECTIBLE)
-	{
-		if (game->assets.collectible_frame == COLLECTIBLE_FRAMES)
-			game->assets.collectible_frame = 0;
-		image = game->assets.collectible[game->assets.collectible_frame++];
-		ms /= COLLECTIBLE_FRAMES;
-	}
+		image = game->assets.collectible[ssi % COLLECTIBLE_FRAMES];
 	else if (type == EXIT)
-	{
-		image = game->assets.exit[0];
-		ms /= 1;
-	}
+		image = game->assets.exit[ssi % EXIT_FRAMES];
 	else if (type == PLAYER)
-	{
-		if (game->assets.player_frame == PLAYER_FRAMES)
-			game->assets.player_frame = 0;
-		image = game->assets.player[game->assets.player_frame++];
-		ms /= PLAYER_FRAMES;
-	}
+		image = game->assets.player[ssi % PLAYER_FRAMES];
 	if (!image)
 		return ;
 	mlx_put_image_to_window(game->mlx, game->window.ptr, image, 
 			PIXEL_PER_IMAGE * column, PIXEL_PER_IMAGE * (row + 1));
-	ms = 50;
-	usleep(ms);
 }
 
 static int	render_game(t_game *game)
 {
+	time_t	seconds_since_initialization;
 	size_t	row;
 	size_t	column;
 
+	seconds_since_initialization = time(NULL) - game->initial_time;
 	row = -1;
 	while (++row < game->map->rows)
 	{
 		column = -1;
 		while (++column < game->map->columns)
-			render_image(game, row, column);
+			render_image(game, row, column, seconds_since_initialization);
 	}
 	return (0);
 }

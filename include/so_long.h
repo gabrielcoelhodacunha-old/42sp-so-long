@@ -3,6 +3,7 @@
 # include <stdio.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <time.h>
 # include "mlx.h"
 # include "libft.h"
 # include "get_next_line.h"
