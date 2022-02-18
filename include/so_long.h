@@ -3,8 +3,8 @@
 # include <stdio.h>
 # include <errno.h>
 # include <fcntl.h>
-# include <time.h>
 # include "mlx.h"
+# include "so_long_bonus.h"
 # include "libft.h"
 # include "get_next_line.h"
 # include "ft_printf.h"
@@ -14,9 +14,11 @@
 
 void	so_long(t_game *game, char *map_file);
 void	configure_map(t_game *game, char *map_file);
-void	configure_mlx(t_game *game);
 void	configure_collectibles(t_game *game);
 void	configure_player(t_game *game);
+void	configure_mlx(t_game *game);
+void	configure_images(t_game *game);
+int	render_game(t_game *game);
 void	finish_game(t_game *game);
 
 t_game	*create_game(void);
@@ -24,7 +26,7 @@ t_matrix	*create_map(char *file);
 
 void	fill_map(t_matrix *map, char *file);
 
-int	handle_keyboard(int key_code, void *game);
+int	handle_keyboard(int key_code, t_game *game);
 int	handle_movement(t_game *game, int key_code);
 int	handle_close(void *mlx);
 
@@ -34,6 +36,7 @@ void	check_map_file(t_game *game, char *file);
 void	check_map(t_game *game);
 void	check_mlx(t_game *game);
 void	check_window(t_game *game);
+void	check_images(t_game *game);
 
 void	destroy_game(t_game *game);
 

@@ -1,6 +1,8 @@
 #include "so_long.h"
 
 static void	destroy_mlx(t_game *game);
+static void	destroy_images(t_game *game);
+static void	destroy_component_images(t_game *game, void**images, int frames);
 static void	destroy_error(char *error);
 
 void	destroy_game(t_game *game)
@@ -14,41 +16,35 @@ void	destroy_game(t_game *game)
 	game = NULL;
 }
 
-static void	destroy_assets(t_game *game);
-
 static void	destroy_mlx(t_game *game)
 {
 	if (!game->mlx && !game->window.ptr)
 		return ;
-	destroy_assets(game);
+	destroy_images(game);
 	if (game->window.ptr)
 		mlx_destroy_window(game->mlx, game->window.ptr);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
 }
 
-static void	destroy_assets(t_game *game)
+static void	destroy_images(t_game *game)
+{
+	destroy_component_images(game, game->images.empty, EMPTY_FRAMES);
+	destroy_component_images(game, game->images.wall, WALL_FRAMES);
+	destroy_component_images(game, game->images.collectible, COLLECTIBLE_FRAMES);
+	destroy_component_images(game, game->images.exit_closed, EXIT_FRAMES);
+	destroy_component_images(game, game->images.exit_open, EXIT_FRAMES);
+	destroy_component_images(game, game->images.player, PLAYER_FRAMES);
+}
+
+static void	destroy_component_images(t_game *game, void**images, int frames)
 {
 	int	idx;
 
 	idx = -1;
-	while (++idx < EMPTY_FRAMES)
-		mlx_destroy_image(game->mlx, game->assets.empty[idx]);
-	idx = -1;
-	while (++idx < WALL_FRAMES)
-		mlx_destroy_image(game->mlx, game->assets.wall[idx]);
-	idx = -1;
-	while (++idx < COLLECTIBLE_FRAMES)
-		mlx_destroy_image(game->mlx, game->assets.collectible[idx]);
-	idx = -1;
-	while (++idx < EXIT_FRAMES)
-	{
-		mlx_destroy_image(game->mlx, game->assets.exit_closed[idx]);
-		mlx_destroy_image(game->mlx, game->assets.exit_open[idx]);
-	}
-	idx = -1;
-	while (++idx < PLAYER_FRAMES)
-		mlx_destroy_image(game->mlx, game->assets.player[idx]);
+	while (++idx < frames)
+		if (images[idx])
+			mlx_destroy_image(game->mlx, images[idx]);
 }
 
 static void	destroy_error(char *error)

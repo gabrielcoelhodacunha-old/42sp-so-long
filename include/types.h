@@ -2,14 +2,14 @@
 # define TYPES_H
 # include "utils.h"
 
-typedef struct	s_pwh
+typedef struct	s_window
 {
-	void	*ptr;
 	int	width;
 	int	height;
-}	t_pwh;
+	void	*ptr;
+}	t_window;
 
-typedef struct	s_assets
+typedef struct	s_images
 {
 	void	*empty[EMPTY_FRAMES];
 	void	*wall[WALL_FRAMES];
@@ -17,7 +17,7 @@ typedef struct	s_assets
 	void	*exit_closed[EXIT_FRAMES];
 	void	*exit_open[EXIT_FRAMES];
 	void	*player[PLAYER_FRAMES];
-}	t_assets;
+}	t_images;
 
 typedef struct	s_player
 {
@@ -28,14 +28,14 @@ typedef struct	s_player
 
 typedef struct	s_game
 {
-	t_matrix	*map;
 	int	collectibles;
-	void	*mlx;
-	t_pwh	window;
-	t_assets	assets;
-	t_player	player;
-	time_t	initial_time;
 	char	*error;
+	void	*mlx;
+	time_t	initial_time;
+	t_images	images;
+	t_matrix	*map;
+	t_player	player;
+	t_window	window;
 }	t_game;
 
 #endif
