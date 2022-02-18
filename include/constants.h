@@ -2,7 +2,7 @@
 # define CONSTANTS_H
 # define DestroyNotify 17
 # define StructureNotifyMask (1L << 17)
-# define PIXEL_PER_IMAGE 32
+# define PIXELS_PER_IMAGE 32
 # define MAP_COMPONENTS "01CEP"
 # define XPM_EMPTY "assets/empty_"
 # define XPM_WALL "assets/wall_"

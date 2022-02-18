@@ -12,7 +12,7 @@ SRC	= check_allocation.c check_args.c check_map.c check_map_file.c check_mlx.c \
 	  check_window.c configure_collectibles.c configure_map.c configure_mlx.c \
 	  configure_player.c create_game.c create_map.c destroy_game.c \
 	  exit_with_error.c fill_map.c finish_game.c handle_close.c handle_keyboard.c \
-	  handle_mouse.c handle_movement.c main.c so_long.c
+	  handle_movement.c main.c so_long.c
 SRCP	= src
 UTILS	= create_matrix.c destroy_matrix.c
 UTILSP	= utils

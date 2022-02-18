@@ -19,8 +19,8 @@ void	configure_mlx(t_game *game)
 
 static void	configure_window(t_game *game)
 {
-	game->window.width = PIXEL_PER_IMAGE * game->map->columns;
-	game->window.height = PIXEL_PER_IMAGE * (game->map->rows + 1);
+	game->window.width = PIXELS_PER_IMAGE * game->map->columns;
+	game->window.height = PIXELS_PER_IMAGE * (game->map->rows + 1);
 	game->window.ptr = mlx_new_window(game->mlx, game->window.width, 
 			game->window.height, "so_long");
 }
@@ -77,7 +77,27 @@ static void	render_image(t_game *game, size_t row, size_t column, time_t ssi)
 	if (!image)
 		return ;
 	mlx_put_image_to_window(game->mlx, game->window.ptr, image, 
-			PIXEL_PER_IMAGE * column, PIXEL_PER_IMAGE * (row + 1));
+			PIXELS_PER_IMAGE * column, PIXELS_PER_IMAGE * (row + 1));
+}
+
+void	show_moves(t_game *game)
+{
+	void	*image;
+	char	*moves;
+	char	*text;
+
+	image = mlx_new_image(game->mlx, game->window.width, 
+			PIXELS_PER_IMAGE / 2);
+	mlx_put_image_to_window(game->mlx, game->window.ptr, image, 0, 0);
+	moves = ft_itoa(game->player.moves);
+	text = ft_strjoin("Moves : ", moves);
+	mlx_string_put(game->mlx, game->window.ptr, 
+			game->window.width / 2 - ft_strlen(text) * 3,
+			PIXELS_PER_IMAGE / 2 - 6,
+			0xffffff, text);
+	mlx_destroy_image(game->mlx, image);
+	free(moves);
+	free(text);
 }
 
 static int	render_game(t_game *game)
@@ -86,6 +106,7 @@ static int	render_game(t_game *game)
 	size_t	row;
 	size_t	column;
 
+	show_moves(game);
 	seconds_since_initialization = time(NULL) - game->initial_time;
 	row = -1;
 	while (++row < game->map->rows)

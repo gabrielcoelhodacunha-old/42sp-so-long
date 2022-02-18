@@ -8,6 +8,8 @@ int	handle_movement(t_game *game, int key_code)
 {
 	int	new_location[2];
 
+	if (!game->player.row)
+		return (0);
 	get_new_location(game, key_code, new_location);
 	if (has_collided(game, new_location))
 		return (1);
@@ -54,12 +56,19 @@ static void	change_player_location(t_game *game, int key_code, int *new_location
 {
 	t_matrix	*m;
 	t_player	*p;
+	char	tile_type;
 
 	m = game->map;
 	p = &game->player;
-	((char *) m->values[p->row])[p->column] = EMPTY;
-	((char *) m->values[new_location[0]])[new_location[1]] = PLAYER;
+	tile_type = ((char *) m->values[new_location[0]])[new_location[1]];
 	p->moves++;
+	((char *) m->values[p->row])[p->column] = EMPTY;
+	if (tile_type == EXIT && !game->collectibles)
+	{
+		p->row = 0;
+		return ;
+	}
+	((char *) m->values[new_location[0]])[new_location[1]] = PLAYER;
 	if (key_code == XK_W)
 		p->row--;
 	else if (key_code == XK_S)

@@ -26,7 +26,6 @@ void	fill_map(t_matrix *map, char *file);
 
 int	handle_keyboard(int key_code, void *game);
 int	handle_movement(t_game *game, int key_code);
-int	handle_mouse(int button, int x, int y, void *mlx);
 int	handle_close(void *mlx);
 
 void	check_allocation(t_game *game, void *value, char *name);

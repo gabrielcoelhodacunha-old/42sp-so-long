@@ -8,6 +8,9 @@ t_game	*create_game(void)
 	if (!game)
 		return (NULL);
 	game->collectibles = 0;
+	game->player.row = 0;
+	game->player.column = 0;
+	game->player.moves = 0;
 	game->map = NULL;
 	game->mlx = NULL;
 	game->window.ptr = NULL;
