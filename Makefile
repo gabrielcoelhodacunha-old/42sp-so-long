@@ -1,5 +1,5 @@
 NAME	= so_long
-CC	= gcc
+CC	= cc
 CFLAGS	= -Wall -Wextra -Werror
 MKINP	= $(MAKE) -sC
 MLXP	= mlx

@@ -6,7 +6,7 @@
 /*   By: gcoelho- <gcoelho-@student.42sp.org>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 10:48:08 by gcoelho-          #+#    #+#             */
-/*   Updated: 2021/10/29 13:10:46 by gcoelho-         ###   ########.fr       */
+/*   Updated: 2022/02/19 12:32:24 by gcoelho-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 # define FLAGS "-.# +"
 # define NUMBER_OF_FLAGS 8
 
-enum {
+enum	e_ft_printf_flags
+{
 	NEGATIVE_WIDTH,
 	PRECISION,
 	ALTERNATE_FORM,
@@ -24,6 +25,6 @@ enum {
 	ZERO_PADDING,
 	FIELD_WIDTH,
 	PRECISION_WIDTH
-} e_flags;
+};
 
 #endif

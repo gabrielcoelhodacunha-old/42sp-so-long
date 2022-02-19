@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   destroy_game.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcoelho- <gcoelho-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/19 12:32:20 by gcoelho-          #+#    #+#             */
+/*   Updated: 2022/02/19 13:28:49 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 static void	destroy_mlx(t_game *game);
@@ -29,12 +41,18 @@ static void	destroy_mlx(t_game *game)
 
 static void	destroy_images(t_game *game)
 {
-	destroy_component_images(game, game->images.empty, EMPTY_FRAMES);
-	destroy_component_images(game, game->images.wall, WALL_FRAMES);
-	destroy_component_images(game, game->images.collectible, COLLECTIBLE_FRAMES);
-	destroy_component_images(game, game->images.exit_closed, EXIT_FRAMES);
-	destroy_component_images(game, game->images.exit_open, EXIT_FRAMES);
-	destroy_component_images(game, game->images.player, PLAYER_FRAMES);
+	destroy_component_images(game, game->images.empty,
+		EMPTY_FRAMES);
+	destroy_component_images(game, game->images.wall,
+		WALL_FRAMES);
+	destroy_component_images(game, game->images.collectible,
+		COLLECTIBLE_FRAMES);
+	destroy_component_images(game, game->images.exit_closed,
+		EXIT_FRAMES);
+	destroy_component_images(game, game->images.exit_open,
+		EXIT_FRAMES);
+	destroy_component_images(game, game->images.player,
+		PLAYER_FRAMES);
 }
 
 static void	destroy_component_images(t_game *game, void**images, int frames)

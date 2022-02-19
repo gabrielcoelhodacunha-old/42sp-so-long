@@ -1,7 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcoelho- <gcoelho-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/19 12:32:20 by gcoelho-          #+#    #+#             */
+/*   Updated: 2022/02/19 13:58:33 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-static void	check_walls(t_game *game);
-static void	check_other_components(t_game *game);
+static void		check_walls(t_game *game);
+static void		check_other_components(t_game *game);
+static size_t	get_component_index(char c);
+static char		*get_component_information(size_t idx);
 
 void	check_map(t_game *game)
 {
@@ -11,7 +25,7 @@ void	check_map(t_game *game)
 
 static void	check_walls(t_game *game)
 {
-	int	is_valid;
+	int		is_valid;
 	size_t	r;
 	size_t	c;
 	char	*map_row;
@@ -23,13 +37,13 @@ static void	check_walls(t_game *game)
 		map_row = (char *) game->map->values[r];
 		if (r == 0 || r == game->map->rows - 1)
 		{
-			c = 0;
-			while (c < game->map->columns && is_valid)
-				is_valid = map_row[c++] == WALL;
+			c = -1;
+			while (++c < game->map->columns && is_valid)
+				is_valid = map_row[c] == WALL;
 		}
-		else
-			is_valid = map_row[0] == WALL
-				&& map_row[game->map->columns - 1] == WALL;
+		else if (map_row[0] == WALL
+			&& map_row[game->map->columns - 1] == WALL)
+			is_valid = 1;
 	}
 	if (is_valid)
 		return ;
@@ -37,9 +51,6 @@ static void	check_walls(t_game *game)
 	game->error = ft_strdup("Map description is not surrounded by walls");
 	exit_with_error(game);
 }
-
-static size_t	get_component_index(char c);
-static char	*get_component_information(size_t idx);
 
 static void	check_other_components(t_game *game)
 {
@@ -65,7 +76,8 @@ static void	check_other_components(t_game *game)
 	if (c == 5)
 		return ;
 	errno = EINVAL;
-	game->error = ft_strjoin("Map description lacks at least one component of type ", get_component_information(c));
+	game->error = ft_strjoin("Map description lacks at least one component"
+			" of type ", get_component_information(c));
 	exit_with_error(game);
 }
 
@@ -76,19 +88,12 @@ static size_t	get_component_index(char c)
 
 static char	*get_component_information(size_t idx)
 {
-	switch (idx)
-	{
-		case 0:
-			return ("0 (EMPTY)");
-		case 1:
-			return ("1 (WALL)");
-		case 2:
-			return ("C (COLLECTIBLE)");
-		case 3:
-			return ("E (EXIT)");
-		case 4:
-			return ("P (PLAYER)");
-		default:
-			return (NULL);
-	}
+	char	*information[5];
+
+	information[0] = "0 (EMPTY)";
+	information[1] = "1 (WALL)";
+	information[2] = "C (COLLECTIBLE)";
+	information[3] = "E (EXIT)";
+	information[4] = "P (PLAYER)";
+	return (information[idx]);
 }

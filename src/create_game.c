@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_game.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcoelho- <gcoelho-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/19 12:32:20 by gcoelho-          #+#    #+#             */
+/*   Updated: 2022/02/19 13:26:59 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 t_game	*create_game(void)
@@ -8,7 +20,7 @@ t_game	*create_game(void)
 	if (!game)
 		return (NULL);
 	game->collectibles = 0;
-	game->error =  NULL;
+	game->error = NULL;
 	game->mlx = NULL;
 	game->map = NULL;
 	game->player.row = 0;

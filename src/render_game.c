@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_game.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcoelho- <gcoelho-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/19 12:32:20 by gcoelho-          #+#    #+#             */
+/*   Updated: 2022/02/19 13:38:07 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 static void	show_moves(t_game *game);
@@ -27,15 +39,15 @@ static void	show_moves(t_game *game)
 	char	*moves;
 	char	*text;
 
-	image = mlx_new_image(game->mlx, game->window.width, 
+	image = mlx_new_image(game->mlx, game->window.width,
 			PIXELS_PER_IMAGE / 2);
 	mlx_put_image_to_window(game->mlx, game->window.ptr, image, 0, 0);
 	moves = ft_itoa(game->player.moves);
 	text = ft_strjoin("Moves : ", moves);
-	mlx_string_put(game->mlx, game->window.ptr, 
-			game->window.width / 2 - ft_strlen(text) * 3,
-			PIXELS_PER_IMAGE / 2 - 6,
-			0xffffff, text);
+	mlx_string_put(game->mlx, game->window.ptr,
+		game->window.width / 2 - ft_strlen(text) * 3,
+		PIXELS_PER_IMAGE / 2 - 6,
+		0xffffff, text);
 	mlx_destroy_image(game->mlx, image);
 	free(moves);
 	free(text);
@@ -59,6 +71,11 @@ static void	render_image(t_game *game, size_t row, size_t column, time_t ssi)
 		image = game->images.exit_open[ssi % EXIT_FRAMES];
 	else if (type == PLAYER)
 		image = game->images.player[ssi % PLAYER_FRAMES];
-	mlx_put_image_to_window(game->mlx, game->window.ptr, image, 
-			PIXELS_PER_IMAGE * column, PIXELS_PER_IMAGE * (row + 1));
+	else
+		image = NULL;
+	if (!image)
+		return ;
+	mlx_put_image_to_window(game->mlx, game->window.ptr, image,
+		PIXELS_PER_IMAGE * column,
+		PIXELS_PER_IMAGE * (row + 1));
 }

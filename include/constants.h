@@ -1,7 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   constants.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcoelho- <gcoelho-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/19 12:32:26 by gcoelho-          #+#    #+#             */
+/*   Updated: 2022/02/19 12:32:26 by gcoelho-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CONSTANTS_H
 # define CONSTANTS_H
-# define DestroyNotify 17
-# define StructureNotifyMask (1L << 17)
 # define PIXELS_PER_IMAGE 32
 # define MAP_COMPONENTS "01CEP"
 # define XPM_EMPTY "images/empty_"
@@ -23,6 +33,18 @@ enum	e_components
 	COLLECTIBLE = 'C',
 	EXIT = 'E',
 	PLAYER = 'P'
+};
+
+enum	e_x11_events
+{
+	KeyPress = 2,
+	DestroyNotify = 17
+};
+
+enum	e_x11_masks
+{
+	KeyPressMask = (1L << 0),
+	StructureNotifyMask = (1L << 17)
 };
 
 enum	e_x11_keys

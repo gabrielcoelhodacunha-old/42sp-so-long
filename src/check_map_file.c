@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map_file.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcoelho- <gcoelho-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/19 12:32:19 by gcoelho-          #+#    #+#             */
+/*   Updated: 2022/02/19 13:50:08 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 static void	check_permissions(t_game *game, char *file);
 static void	check_content(t_game *game, char *file);
+static void	check_line(t_game *game, char *line, size_t *format);
 
 void	check_map_file(t_game *game, char *file)
 {
@@ -23,11 +36,9 @@ static void	check_permissions(t_game *game, char *file)
 	exit_with_error(game);
 }
 
-static void	check_line(t_game *game, char *line, size_t *format);
-
 static void	check_content(t_game *game, char *file)
 {
-	int	fd;
+	int		fd;
 	char	*line;
 	size_t	format[2];
 
@@ -67,9 +78,13 @@ static void	check_line(t_game *game, char *line, size_t *format)
 		return ;
 	row_str = ft_itoa(format[0]);
 	if (line_len != format[1])
-		game->error = ft_strjoin("Map description file has different number of characters on line ", row_str);
+		game->error = ft_strjoin("Map description file has "
+				"different number of characters on line ",
+				row_str);
 	else if (!is_valid)
-		game->error = ft_strjoin("Map description file has invalid characters on line ", row_str);
+		game->error = ft_strjoin("Map description file has "
+				"invalid characters on line ",
+				row_str);
 	errno = EINVAL;
 	free(line);
 	free(row_str);

@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_movement.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcoelho- <gcoelho-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/19 12:32:19 by gcoelho-          #+#    #+#             */
+/*   Updated: 2022/02/19 13:35:23 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 static void	get_new_location(t_game *game, int key_code, int *new_location);
 static int	has_collided(t_game *game, int *new_location);
-static void	change_player_location(t_game *game, int key_code, int *new_location);
+static void	change_player_location(t_game *game, int key_code,
+				int *new_location);
 
 int	handle_movement(t_game *game, int key_code)
 {
@@ -37,13 +50,13 @@ static void	get_new_location(t_game *game, int key_code, int *new_location)
 static int	has_collided(t_game *game, int *new_location)
 {
 	t_matrix	*m;
-	char	tile_type;
+	char		tile_type;
 
 	m = game->map;
 	tile_type = ((char *) m->values[new_location[0]])[new_location[1]];
 	if (tile_type == WALL
 		|| (tile_type == EXIT
-		&& game->collectibles))
+			&& game->collectibles))
 		return (1);
 	else if (tile_type == COLLECTIBLE)
 		game->collectibles--;
@@ -52,11 +65,12 @@ static int	has_collided(t_game *game, int *new_location)
 	return (0);
 }
 
-static void	change_player_location(t_game *game, int key_code, int *new_location)
+static void	change_player_location(t_game *game, int key_code,
+				int *new_location)
 {
 	t_matrix	*m;
 	t_player	*p;
-	char	tile_type;
+	char		tile_type;
 
 	m = game->map;
 	p = &game->player;
