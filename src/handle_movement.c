@@ -6,7 +6,7 @@
 /*   By: gcoelho- <gcoelho-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 12:32:19 by gcoelho-          #+#    #+#             */
-/*   Updated: 2022/02/19 13:35:23 by marvin           ###   ########.fr       */
+/*   Updated: 2022/02/19 19:01:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ static int	has_collided(t_game *game, int *new_location)
 		return (1);
 	else if (tile_type == COLLECTIBLE)
 		game->collectibles--;
-	else if (tile_type == EXIT)
-		finish_game(game);
 	return (0);
 }
 

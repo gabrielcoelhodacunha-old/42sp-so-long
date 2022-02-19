@@ -6,7 +6,7 @@
 /*   By: gcoelho- <gcoelho-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 12:32:20 by gcoelho-          #+#    #+#             */
-/*   Updated: 2022/02/19 13:38:07 by marvin           ###   ########.fr       */
+/*   Updated: 2022/02/19 18:59:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	render_game(t_game *game)
 	size_t	row;
 	size_t	column;
 
+	if (!game->player.row)
+		finish_game(game);
 	show_moves(game);
 	seconds_since_initialization = time(NULL) - game->initial_time;
 	row = -1;

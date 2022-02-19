@@ -43,7 +43,6 @@ $(MLX):
 		$(MKMLX)
 
 $(LFT):
-		$(MKLFT) bonus
 		$(MKLFT) gnl
 		$(MKLFT) printf
 
